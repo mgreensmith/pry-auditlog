@@ -1,30 +1,39 @@
 module PryAuditlog
   class Logger
-    def initialize()
-      begin
-        @audit_file = File.open(Pry.config.auditlog_file, 'a', 0600).tap { |f| f.sync = true }
-      rescue Errno::EACCES
-        @audit_file = false
-      end
+    begin
+      @@audit_file = File.open(Pry.config.auditlog_file, 'a', 0600).tap { |f| f.sync = true }
+    rescue Errno::EACCES
+      @@audit_file = false
     end
 
-    def log_input(line)
+
+    def self.log_input(line)
       input_line = "[INPUT] #{line}"
-      audit_log(input_line)
+      self.audit_log(input_line)
     end
 
-    def log_output(line)
+    def self.log_output(line)
       output_line = "[OUTPUT] #{line}"
-      audit_log(output_line)
+      self.audit_log(output_line)
     end
 
-    def log(line)
-      audit_log(line)
+    def self.log_eval(line)
+      eval_line = "[EVAL] #{line}"
+      self.audit_log(eval_line)
     end
 
-    def audit_log(line)
+    def self.log_banner(line)
+      output_line = "***** #{line} *****"
+      self.audit_log(output_line)
+    end
+
+    def self.log(line)
+      self.audit_log(line)
+    end
+
+    def self.audit_log(line)
       log_line = "[#{Time.now.to_s}] #{line}"
-      @audit_file.puts log_line
+      @@audit_file.puts log_line if @@audit_file
     end
 
   end
