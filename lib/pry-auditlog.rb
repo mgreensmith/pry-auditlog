@@ -24,5 +24,3 @@ Pry.config.hooks.add_hook(:after_session, :unhijack_stdout) do
   $stdout = Pry.config.orig_stdout
   $stderr = Pry.config.orig_stderr
 end
-
-

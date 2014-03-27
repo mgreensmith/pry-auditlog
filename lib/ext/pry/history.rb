@@ -16,7 +16,7 @@ class Pry
       end
       @saved_lines = @original_lines = @history.length
 
-      PryAuditlog::Logger.log_banner("New Pry session started") if Pry.config.auditlog_enabled
+      PryAuditlog::Logger.log("**** META ****", "New Pry session started") if Pry.config.auditlog_enabled
     end
 
     # new methods for use by PryAuditlog
@@ -27,7 +27,7 @@ class Pry
     end
 
     def audit_and_push(line)
-      PryAuditlog::Logger.log_input(line)
+      PryAuditlog::Logger.log("INPUT", line)
       @original_pusher.call(line)
     end
 
