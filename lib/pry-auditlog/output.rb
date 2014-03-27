@@ -7,7 +7,7 @@ module PryAuditlog
 
     def puts(line)
       PryAuditlog::Logger.log_output(line)
-      #@original_output.puts(line)
+      @original_output.puts(line)
     end
   end
 end

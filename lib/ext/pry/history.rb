@@ -23,10 +23,10 @@ class Pry
 
     def load_auditor
       @original_pusher = @pusher
-      @pusher = method(:audit_and_push_to_readline) if Pry.config.auditlog_enabled
+      @pusher = method(:audit_and_push) if Pry.config.auditlog_enabled
     end
 
-    def audit_and_push_to_readline(line)
+    def audit_and_push(line)
       PryAuditlog::Logger.log_input(line)
       @original_pusher.call(line)
     end
