@@ -5,7 +5,7 @@ require 'pry-auditlog/output'
 
 
 Pry.config.auditlog_enabled ||= false
-Pry.config.auditlog_file ||= nil
+Pry.config.auditlog_file ||= "~/.pry_auditlog"
 Pry.config.auditlog_log_input ||= true
 Pry.config.auditlog_log_output ||= true
 
