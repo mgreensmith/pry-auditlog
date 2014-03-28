@@ -6,6 +6,10 @@ module PryAuditlog
       @@audit_file = false
     end
 
+    def self.set_session_token(token)
+      @@session_token = token
+    end
+
     def self.set_prompt(current_prompt)
       @@current_prompt = current_prompt
     end
@@ -14,7 +18,7 @@ module PryAuditlog
       if type == 'I'
         line = "#{@@current_prompt}#{line}"
       end
-      log_line = "[#{Time.now.to_s}] [#{type}] #{line}"
+      log_line = "[#{Time.now.to_s}][#{@@session_token}] [#{type}] #{line}"
       @@audit_file.puts log_line if @@audit_file
     end
 
