@@ -6,7 +6,14 @@ module PryAuditlog
       @@audit_file = false
     end
 
+    def self.set_prompt(current_prompt)
+      @@current_prompt = current_prompt
+    end
+
     def self.log(type, line)
+      if type == 'I'
+        line = "#{@@current_prompt}#{line}"
+      end
       log_line = "[#{Time.now.to_s}] [#{type}] #{line}"
       @@audit_file.puts log_line if @@audit_file
     end

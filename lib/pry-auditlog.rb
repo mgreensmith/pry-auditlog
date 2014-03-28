@@ -10,7 +10,10 @@ Pry.config.auditlog_log_input ||= true
 Pry.config.auditlog_log_output ||= true
 
 if Pry.config.auditlog_enabled
-  require 'ext/pry/history' if Pry.config.auditlog_log_input
+  if Pry.config.auditlog_log_input
+    require 'ext/pry/history'
+    require 'ext/pry/pry_instance'
+  end
 
   if Pry.config.auditlog_log_output
     Pry.config._orig_stdout = $stdout
