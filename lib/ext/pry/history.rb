@@ -1,11 +1,14 @@
 class Pry
   class History
     
-    attr_accessor :original_pusher
+    #attr_accessor :original_pusher
 
-    # we monkeypatch 'load' to ensure that we don't dump the entire history
-    # into the auditlog on startup.
+    # we monkeypatch 'load' to 
+    # 1. Overwrite @pusher with our own audit_and_push method
+    # 2. ensure that we don't write the entire history into the audit log on load.
     def load
+      @original_pusher ||= @pusher
+      @pusher = method(:audit_and_push) if Pry.config.auditlog_enabled
       @loader.call do |line|
         if Pry.config.auditlog_enabled
           @original_pusher.call(line.chomp)
@@ -15,19 +18,11 @@ class Pry
         @history << line.chomp
       end
       @saved_lines = @original_lines = @history.length
-
-      PryAuditlog::Logger.log("**** META ****", "New Pry session started") if Pry.config.auditlog_enabled
     end
 
-    # new methods for use by PryAuditlog
-
-    def load_auditor
-      @original_pusher = @pusher
-      @pusher = method(:audit_and_push) if Pry.config.auditlog_enabled
-    end
-
+    # new method
     def audit_and_push(line)
-      PryAuditlog::Logger.log("INPUT", line)
+      PryAuditlog::Logger.log("I", line)
       @original_pusher.call(line)
     end
 

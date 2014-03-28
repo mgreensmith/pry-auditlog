@@ -3,24 +3,32 @@ require 'pry-auditlog/version'
 require 'pry-auditlog/logger'
 require 'pry-auditlog/output'
 
+
 Pry.config.auditlog_enabled ||= false
 Pry.config.auditlog_file ||= nil
-Pry.config.orig_stdout = $stdout
-Pry.config.orig_stderr = $stderr
+Pry.config.auditlog_log_input ||= true
+Pry.config.auditlog_log_output ||= true
 
-require 'ext/pry/history'
+if Pry.config.auditlog_enabled
+  require 'ext/pry/history' if Pry.config.auditlog_log_input
 
-Pry.history.load_auditor
-original_output = Pry.config.output
-Pry.config.output = PryAuditlog::Output.new
-Pry.config.output.set_original_output(original_output)
+  if Pry.config.auditlog_log_output
+    Pry.config._orig_stdout = $stdout
+    Pry.config._orig_stderr = $stderr
 
-Pry.config.hooks.add_hook(:before_session, :hijack_stdout) do
-  old_stdout, old_stderr = $stdout, $old_stderr
-  $stdout = $stderr = Pry.config.output
-end
+    original_output = Pry.config.output
+    Pry.config.output = PryAuditlog::Output.new
+    Pry.config.output._set_original_output(original_output)
+  end
 
-Pry.config.hooks.add_hook(:after_session, :unhijack_stdout) do
-  $stdout = Pry.config.orig_stdout
-  $stderr = Pry.config.orig_stderr
+  Pry.config.hooks.add_hook(:before_session, :prepare_auditlog) do
+    $stdout = $stderr = Pry.config.output if Pry.config.auditlog_log_output
+    PryAuditlog::Logger.log("AUDIT LOG", "Pry session started")
+  end
+
+  Pry.config.hooks.add_hook(:after_session, :unhijack_stdout) do
+    $stdout = Pry.config._orig_stdout
+    $stderr = Pry.config._orig_stderr
+    PryAuditlog::Logger.log("AUDIT LOG", "Pry session ended")
+  end
 end
