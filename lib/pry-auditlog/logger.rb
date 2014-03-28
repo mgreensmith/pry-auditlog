@@ -18,7 +18,7 @@ module PryAuditlog
       if type == 'I'
         line = "#{@@current_prompt}#{line}"
       end
-      log_line = "[#{Time.now.to_s}][#{@@session_token}] [#{type}] #{line}"
+      log_line = "[#{Time.now.to_s}][#{@@session_token}][#{type}] #{line}"
       @@audit_file.puts log_line if @@audit_file
     end
 
