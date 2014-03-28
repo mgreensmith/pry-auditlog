@@ -1,4 +1,4 @@
-Copyright (c) 2014 Matt Greensmith, Cozy Services Ltd.
+Copyright (c) 2014 Cozy Services Ltd.
 
 MIT License
 
