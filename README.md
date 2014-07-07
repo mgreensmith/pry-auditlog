@@ -2,7 +2,7 @@
 
 PryAuditlog is a plugin for the [Pry](http://pry.github.com) REPL that enables logging of any combination of Pry input and output to a configured audit log file.
 
-It scrapes the Pry history sender to read input statements to Pry, and it inserts itself into the `output` mechanism to scrape a copy of all emitted data. It also redirects `$stdout` and `$stderr` during the Pry session in order to capture all output emitted from any `puts` or similar statements. 
+It modifies the `read` method of the REPL class to read input statements to Pry, and it inserts itself into the `output` mechanism to scrape a copy of all emitted data. It also redirects `$stdout` and `$stderr` during the Pry session in order to capture all output emitted from any `puts` or similar statements. 
 
 All output data is forwarded to the original configured `Pry.config.output` mechanism after logging, and this plugin should (hopefully) respect any configured outputter.
 
@@ -21,7 +21,7 @@ Set appropriate config values and then require the plugin in your `.pryrc` or an
 Pry.config.auditlog_enabled = true         # default: false
 
 # Optional path to audit log destination
-Pry.config.auditlog_file = '/path/to/file' # default: "~/.pry_auditlog"
+Pry.config.auditlog_file = '/path/to/file' # default: '/dev/null'
 
 # We log both input and output by default
 Pry.config.auditlog_log_input = false    # default: true
