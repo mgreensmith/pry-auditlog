@@ -20,15 +20,15 @@ if Pry.config.auditlog_enabled
     Pry.config.output._set_original_output(Pry.config.original_output)
   end
 
-  hooks = Pry::Hooks.new
+  local_hooks = Pry::Hooks.new
 
-  hooks.add_hook(:before_session, :prepare_auditlog) do
+  local_hooks.add_hook(:before_session, :prepare_auditlog) do
     $stdout = $stderr = Pry.config.output if Pry.config.auditlog_log_output
     PryAuditlog::Logger.set_session_token(Time.now.to_i)
     PryAuditlog::Logger.log('AUDIT LOG', 'Pry session started')
   end
 
-  hooks.add_hook(:after_session, :clean_up_auditlog) do
+  local_hooks.add_hook(:after_session, :clean_up_auditlog) do
     if Pry.config.auditlog_log_output
       $stdout = Pry.config._orig_stdout
       $stderr = Pry.config._orig_stderr
@@ -36,5 +36,5 @@ if Pry.config.auditlog_enabled
     PryAuditlog::Logger.log('AUDIT LOG', 'Pry session ended')
   end
 
-  Pry.config.hooks = @hooks
+  Pry.config.hooks = local_hooks
 end
