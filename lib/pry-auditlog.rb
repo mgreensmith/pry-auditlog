@@ -17,7 +17,7 @@ if Pry.config.auditlog_enabled
 
     Pry.config.original_output = Pry.config.output
     Pry.config.output = PryAuditlog::Output.new
-    Pry.config.output._set_original_output(Pry.config.original_output)
+    Pry.config.output._original_output(Pry.config.original_output)
   end
 
   local_hooks = Pry::Hooks.new
