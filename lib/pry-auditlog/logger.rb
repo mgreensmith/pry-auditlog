@@ -22,7 +22,7 @@ module PryAuditlog
 
     def self.log(type, line)
       line = "#{@@current_prompt}#{line}" if type == 'I'
-      log_line = "[#{Time.now.to_s}][#{@@session_token}][#{type}] #{line}"
+      log_line = "[#{Time.now}][#{@@session_token}][#{type}] #{line}"
       @@audit_file.puts log_line if @@audit_file && !line.strip.empty?
     end
   end

@@ -8,7 +8,7 @@ module PryAuditlog
       PryAuditlog::Logger.log('O', line)
       @original_output.print(line)
     end
-    alias << print
-    alias write print
+    alias_method :<<, :print
+    alias_method :write, :print
   end
 end
