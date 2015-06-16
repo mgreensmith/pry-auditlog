@@ -1,6 +1,6 @@
 module PryAuditlog
   class Output < StringIO
-    attr_writer :_original_output
+    attr_accessor :_original_output
 
     def print(line)
       PryAuditlog::Logger.log('O', line)

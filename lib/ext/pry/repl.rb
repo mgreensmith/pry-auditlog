@@ -44,7 +44,7 @@ class Pry
 
       # send the prompt and log line to our logger.
       if Pry.config.auditlog_log_input
-        PryAuditlog::Logger.prompt(current_prompt)
+        PryAuditlog::Logger.prompt = current_prompt
         PryAuditlog::Logger.log('I', indented_val)
       end
 

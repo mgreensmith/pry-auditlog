@@ -1,6 +1,8 @@
 module PryAuditlog
   class Logger
-    attr_writer :audit_file, :prompt, :session_token
+    class << self
+      attr_accessor :audit_file, :prompt, :session_token
+    end
 
     @prompt = ''
     @session_token = ''
