@@ -24,7 +24,7 @@ if Pry.config.auditlog_enabled
 
   local_hooks.add_hook(:before_session, :prepare_auditlog) do
     $stdout = $stderr = Pry.config.output if Pry.config.auditlog_log_output
-    PryAuditlog::Logger.set_session_token(Time.now.to_i)
+    PryAuditlog::Logger.session_token(Time.now.to_i)
     PryAuditlog::Logger.log('AUDIT LOG', 'Pry session started')
   end
 
