@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['matt@mattgreensmith.net', 'opensource@cozy.co']
   spec.summary       = 'Adds audit log capability to Pry'
   spec.description   = 'PryAuditlog is a plugin for the Pry REPL that enables logging of any combination of Pry input and output to a configured audit file.'
-  spec.homepage      = 'http://github.com/cozyco/pry-auditlog'
+  spec.homepage      = 'http://github.com/mgreensmith/pry-auditlog'
   spec.license       = 'MIT'
   spec.files         = `git ls-files -z`.split("\x0")
   spec.require_paths = ['lib']
