@@ -6,8 +6,8 @@ require 'pry-auditlog/version'
 Gem::Specification.new do |spec|
   spec.name          = 'pry-auditlog'
   spec.version       = PryAuditlog::VERSION
-  spec.authors       = ['Cozy Services Ltd.', 'Matt Greensmith']
-  spec.email         = ['opensource@cozy.co']
+  spec.authors       = ['Matt Greensmith', 'Cozy Services Ltd.']
+  spec.email         = ['matt@mattgreensmith.net', 'opensource@cozy.co']
   spec.summary       = %q{Adds audit log capability to Pry}
   spec.description   = %q{PryAuditlog is a plugin for the Pry REPL that enables logging of any combination of Pry input and output to a configured audit log file.}
   spec.homepage      = 'http://github.com/cozyco/pry-auditlog'

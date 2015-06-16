@@ -31,6 +31,7 @@ Pry.config.auditlog_log_output = false   # default: true
 require 'pry-auditlog'
 ```
 
-### Author
+## Copyright
 
-Matt Greensmith for [Cozy](http://www.cozy.co)
+Copyright (c) 2014-2015 Matt Greensmith and Cozy Services Ltd. See [LICENSE.txt](LICENSE.txt) for
+further details.
