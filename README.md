@@ -1,5 +1,8 @@
 # PryAuditlog
 
+[![Build Status](https://travis-ci.org/mgreensmith/pry-auditlog.svg)](https://travis-ci.org/mgreensmith/pry-auditlog)
+[![Gem Version](https://badge.fury.io/rb/pry-auditlog.svg)](http://badge.fury.io/rb/pry-auditlog)
+
 PryAuditlog is a plugin for the [Pry](http://pry.github.com) REPL that enables logging of any combination of Pry input and output to a configured audit log file.
 
 It modifies the `read` method of the REPL class to read input statements to Pry, and it inserts itself into the `output` mechanism to scrape a copy of all emitted data. It also redirects `$stdout` and `$stderr` during the Pry session in order to capture all output emitted from any `puts` or similar statements. 
