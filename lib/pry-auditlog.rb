@@ -3,6 +3,7 @@ require 'pry-auditlog/version'
 
 Pry.config.auditlog_enabled = false unless defined?(Pry.config.auditlog_enabled)
 Pry.config.auditlog_file = '/dev/null' unless defined?(Pry.config.auditlog_file)
+Pry.config.auditlog_file_mode = 0600 unless defined?(Pry.config.auditlog_file_mode)
 Pry.config.auditlog_log_input = true unless defined?(Pry.config.auditlog_log_input)
 Pry.config.auditlog_log_output = true unless defined?(Pry.config.auditlog_log_output)
 

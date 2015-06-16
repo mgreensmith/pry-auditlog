@@ -18,14 +18,15 @@ Set appropriate config values and then require the plugin in your `.pryrc` or an
 
 ```
 # The auditlog must be explicitly enabled
-Pry.config.auditlog_enabled = true         # default: false
+Pry.config.auditlog_enabled = true           # default: false
 
-# Optional path to audit log destination
-Pry.config.auditlog_file = '/path/to/file' # default: '/dev/null'
+# Path to audit log destination and optional file mode
+Pry.config.auditlog_file = '/path/to/file'   # default: '/dev/null'
+Pry.config.auditlog_file_mode = 0644         # default: 0600
 
 # We log both input and output by default
-Pry.config.auditlog_log_input = false    # default: true
-Pry.config.auditlog_log_output = false   # default: true
+Pry.config.auditlog_log_input = false        # default: true
+Pry.config.auditlog_log_output = false       # default: true
 
 # Set all config values *before* requiring the plugin
 require 'pry-auditlog'

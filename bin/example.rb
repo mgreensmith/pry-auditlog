@@ -3,7 +3,7 @@
 require 'pry'
 
 Pry.config.auditlog_enabled = true
-Pry.config.auditlog_file = '/pry_audit.log'
+Pry.config.auditlog_file = '~/pry_audit.log'
 require 'pry-auditlog'
 
 Pry.start
